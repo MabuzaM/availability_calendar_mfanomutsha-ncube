@@ -1,0 +1,28 @@
+.Timetable {
+
+  top: 52px;
+  border: 1px solid #c3c3c3;
+  border-top: 3px solid #2dcfc7;
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+
+  &__headings {
+    background-color: #000;
+    color: #fff;
+  }
+
+  &__row,
+  &__data {
+    border: 1px solid #c3c3c3;
+    padding: 10px 6px;
+
+    &--disabled {
+      background: #ccc;
+    }
+
+    &--bgColor {
+      background-color: #0f0;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.App {
+  text-align: left;
+
+  &__main {
+    padding: 32px;
+  }
+
+  &__slider {
+    margin-bottom: 32px;
+    width: 300px;
+    
+    &--value {
+      display: flex;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 24px;
+    }
+  }
+}

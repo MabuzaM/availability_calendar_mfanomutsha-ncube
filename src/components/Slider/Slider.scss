@@ -1,0 +1,40 @@
+  $main-color: #000;
+  $main-color-hover: #6875d933;
+  $track-color: #2dcfc7;
+  $mark-color: #aaaaaa;
+
+.Slider {
+  max-width: 100%;
+  left: 0;
+
+  &__mark {
+    cursor: pointer;
+    top: 6px;
+    width: 1.5px;
+    height: 8px;
+    background-color: $mark-color;
+  }
+
+  &__thumb {
+    cursor: pointer;
+    background: $main-color;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    outline: none;
+
+    &:hover {
+      box-shadow: 0 0 0 8px $main-color-hover;
+    }
+  }
+
+  &__track {
+    top: 8px;
+    height: 4px;
+    background: $track-color;
+  }
+  
+  &__track &__track-0 {
+    background: $main-color;
+  }
+}
