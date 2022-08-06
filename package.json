@@ -1,5 +1,6 @@
 {
   "name": "availability_calendar_mfanomutsha-ncube",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
