@@ -1,19 +1,36 @@
 .App {
-  text-align: left;
+  &__header {
+    text-align: center;
+    padding: 16px 32px;
+    max-width: 2024px;
+    border-bottom: 2px solid #2dcfc7;
+  }
 
   &__main {
     padding: 32px;
+    max-width: 2024px;
   }
 
   &__slider {
     margin-bottom: 32px;
-    width: 300px;
+    max-width: 300px;
     
     &--value {
       display: flex;
       justify-content: center;
       font-weight: 700;
       font-size: 24px;
+    }
+  }
+
+  &__time {
+    margin-bottom: 32px;
+
+    &--input {
+      margin-left: 10px;
+      padding: 6px;
+      outline: 0;
+      border: 1px solid #2dcfc7;
     }
   }
 }

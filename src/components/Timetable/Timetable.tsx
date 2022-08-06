@@ -6,22 +6,26 @@ import cn from 'classnames';
 interface TimetableProps {
   calendarItems: CalendarItem[];
   currentSliderValue: number;
+  time: number;
 }
 
-export const Timetable: FC<TimetableProps> = React.memo(({ calendarItems, currentSliderValue }) => {
+export const Timetable: FC<TimetableProps> = React.memo(({
+  calendarItems,
+  currentSliderValue,
+  time,
+}) => {
   const timeSlots = [9,10,11,12,13,14,15,16,17];
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
-  const [cellIndex, setCellIndex] = useState(-1);
 
   return (
-    <table className="Timetable" onLoad={() => setIsDisabled(true)}>
+    <table className="Timetable">
       <thead className="Timetable__headings">
         <tr className="Timetable__row">
-          <th className="Timetable__data"></th>
+          <th className="Timetable__heading"></th>
           {
             calendarItems.map((calendarItem: CalendarItem) => (
-              <th key={calendarItem.Date} className="Timetable__data">{(calendarItem.Date)}</th>
+              <th key={calendarItem.Date} className="Timetable__heading">{(calendarItem.Date)}</th>
             ))
           }
         </tr>        
@@ -34,28 +38,40 @@ export const Timetable: FC<TimetableProps> = React.memo(({ calendarItems, curren
               <td className="Timetable__data" key={slot}>{`${slot} - ${slot + 1}`}</td>
               {
                 calendarItems.map((item, i) => {
+                  const { Date, HoursAvailable } = item;
                   return <td
-                    className={cn(
-                      'Timetable__data',
-                      {
-                        'Timetable__data--disabled': isDisabled,
-                        'Timetable__data--bgColor': cellIndex === i}
-                    )}
                     key={i}
-                    defaultValue={''}
-                    onClick={(event) => {
-                      setCellIndex(i);
-                      if (cellIndex === i) {
-                        setIsSelected(true);
-                      }
-                      console.log(event.target);
-                    }}
+                    className="Timetable__data"
                   >
-                    <>
+                    <button
+                      className={cn(
+                        'Timetable__button',
+                        {
+                          'Timetable__button--disabled': isDisabled,
+                          'Timetable__button--bgColor': isSelected}
+                      )}
+                      disabled={isDisabled}
+                      onClick={(event) => {
+                        setIsSelected(true)
+                        const { nodeValue } = event.currentTarget.childNodes[0];
+                        console.log(event.currentTarget.childNodes[0].nodeValue)
+                        if (nodeValue !== 'Available') {
+                          setIsDisabled(true);
+                        }
+                      }}
+
+                      onLoad={(event) => {
+                        const { nodeValue } = event.currentTarget.childNodes[0];
+                        console.log(nodeValue);
+                        if (nodeValue !== 'Available') {
+                          setIsDisabled(true);
+                        }
+                      }}
+                    >
                       {
-                        checkSlotAvailability(10, currentSliderValue, item.Date, item.HoursAvailable)
+                        checkSlotAvailability(time, currentSliderValue, Date, HoursAvailable)
                       }
-                    </>
+                    </button>
                   </td>
                 })
               }

@@ -12,17 +12,39 @@
     color: #fff;
   }
 
-  &__row,
-  &__data {
+  &__heading {
     border: 1px solid #c3c3c3;
     padding: 10px 6px;
+  }
+
+  &__data {
+    border: 1px solid #c3c3c3;
+  }
+
+  &__button {
+    padding: 10px 6px;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background-color: #fff;
+    transition: background-color ease-in-out 0.5s;
+    
+    &:hover {
+      cursor: pointer;
+      background-color: #1b571b;
+      color: #fff;
+    }
 
     &--disabled {
       background: #ccc;
     }
 
     &--bgColor {
-      background-color: #0f0;
+      background-color: #1b571b;
+      color: #fff;
     }
   }
+
+
 }
