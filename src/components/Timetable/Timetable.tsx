@@ -14,9 +14,23 @@ export const Timetable: FC<TimetableProps> = React.memo(({
   currentSliderValue,
   time,
 }) => {
-  const timeSlots = [9,10,11,12,13,14,15,16,17];
+  const timeSlots: number[] = [9,10,11,12,13,14,15,16,17];
+  const [isFull, setIsFull] = useState<boolean>(false);
+  const [isUnavailable, setIsUnavailable] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+
+  const styleTableCellsConditionally = (status: string) => {
+    switch (status) {
+      case 'Full':
+        setIsFull(true);
+        break;
+      case 'Unavailable':
+        setIsUnavailable(true);
+        break;
+      default: setIsSelected(false);
+    }
+  }
 
   return (
     <table className="Timetable">
@@ -39,6 +53,7 @@ export const Timetable: FC<TimetableProps> = React.memo(({
               {
                 calendarItems.map((item, i) => {
                   const { Date, HoursAvailable } = item;
+
                   return <td
                     key={i}
                     className="Timetable__data"
@@ -48,23 +63,17 @@ export const Timetable: FC<TimetableProps> = React.memo(({
                         'Timetable__button',
                         {
                           'Timetable__button--disabled': isDisabled,
-                          'Timetable__button--bgColor': isSelected}
+                          'Timetable__button--selected': isSelected,
+                          'Timetable__button--full': isFull,
+                          'Timetable__button--unAvailable': isUnavailable,
+                        }
                       )}
                       disabled={isDisabled}
                       onClick={(event) => {
-                        setIsSelected(true)
                         const { nodeValue } = event.currentTarget.childNodes[0];
                         console.log(event.currentTarget.childNodes[0].nodeValue)
-                        if (nodeValue !== 'Available') {
-                          setIsDisabled(true);
-                        }
-                      }}
-
-                      onLoad={(event) => {
-                        const { nodeValue } = event.currentTarget.childNodes[0];
-                        console.log(nodeValue);
-                        if (nodeValue !== 'Available') {
-                          setIsDisabled(true);
+                        if (nodeValue === 'Available') {
+                          setIsSelected(true);
                         }
                       }}
                     >

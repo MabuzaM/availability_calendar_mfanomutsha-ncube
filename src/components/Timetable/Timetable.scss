@@ -40,9 +40,19 @@
       background: #ccc;
     }
 
-    &--bgColor {
+    &--selected {
       background-color: #1b571b;
       color: #fff;
+    }
+
+    &--full {
+      background-color: #f00;
+      color: #fff;
+    }
+
+    &--unAvailable {
+      background-color: #ccc;
+      color: #000;
     }
   }
 

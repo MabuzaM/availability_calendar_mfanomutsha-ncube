@@ -6,7 +6,7 @@ import Slider from './components/Slider/Slider';
 
 function App() {
   const [currentValue, setCurrentValue] = useState(0);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(9);
   const setSliderValue = (value: number) => {
     setCurrentValue(value);
   }
