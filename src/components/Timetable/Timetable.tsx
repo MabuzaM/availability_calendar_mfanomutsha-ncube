@@ -15,22 +15,10 @@ export const Timetable: FC<TimetableProps> = React.memo(({
   time,
 }) => {
   const timeSlots: number[] = [9,10,11,12,13,14,15,16,17];
-  const [isFull, setIsFull] = useState<boolean>(false);
-  const [isUnavailable, setIsUnavailable] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isFull] = useState<boolean>(false);
+  const [isUnavailable] = useState(false);
+  const [isDisabled] = useState(false);
   const [isSelected, setIsSelected] = useState<boolean>(false);
-
-  const styleTableCellsConditionally = (status: string) => {
-    switch (status) {
-      case 'Full':
-        setIsFull(true);
-        break;
-      case 'Unavailable':
-        setIsUnavailable(true);
-        break;
-      default: setIsSelected(false);
-    }
-  }
 
   return (
     <table className="Timetable">
@@ -71,7 +59,6 @@ export const Timetable: FC<TimetableProps> = React.memo(({
                       disabled={isDisabled}
                       onClick={(event) => {
                         const { nodeValue } = event.currentTarget.childNodes[0];
-                        console.log(event.currentTarget.childNodes[0].nodeValue)
                         if (nodeValue === 'Available') {
                           setIsSelected(true);
                         }
